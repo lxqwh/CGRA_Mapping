@@ -10,27 +10,28 @@
 
 #include "argraph.h"  //AttrComparator和AttrDestroyer在argraph.h中
 #include <iostream>
+#include <string>
 
 using namespace std;
 
 class Pe
 {
 public:
-	Pe(int thePe) :peAttr(thePe)
+	Pe(string thePe) :peAttr(thePe)
 	{}
 
-	int getPeAttr()
+	string getPeAttr()
 	{
 		return peAttr;
 	}
 
-	void setPeAttr(int thePe)
+	void setPeAttr(string thePe)
 	{
 		this->peAttr = thePe;
 	}
 
 private:
-	int peAttr; //pe属性
+	string peAttr; //pe属性
 
 };
 
@@ -55,6 +56,23 @@ public:
 		Pe *a = (Pe *)nodeA;
 		Pe *b = (Pe *)nodeB;
 		//cout << a->getPeAttr() << " a b " << b->getPeAttr();
+		string as = a->getPeAttr();
+		string bs = b->getPeAttr();
+		if(as[0]=='0' && bs[0]=='1'){
+			
+		}
+		else if(as[0]=='1' && bs[0]=='0'){
+			
+		}
+		else if(as[0]=='0' && bs[0]=='0'){
+			
+		}
+		else if(as[0]=='1' && bs[0]=='1'){
+			
+		}
+		else 
+			return false;
+		
 		return a->getPeAttr() == b->getPeAttr();
 	}
 };
