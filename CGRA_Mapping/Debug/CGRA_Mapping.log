@@ -1,15 +1,16 @@
-﻿生成启动时间为 2016/3/9 16:46:15。
-     1>项目“E:\git\CGRA_Mapping\CGRA_Mapping\CGRA_Mapping.vcxproj”在节点 2 上(Build 个目标)。
+﻿生成启动时间为 2016/3/10 17:11:17。
+     1>项目“E:\git\CGRA_Mapping\CGRA_Mapping\CGRA_Mapping.vcxproj”在节点 2 上(Rebuild 个目标)。
      1>ClCompile:
-         D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt Mapping_test.cpp argedit.cc argraph.cc vf2_mono_state.cc
+         D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt argedit.cc argraph.cc error.cc Mapping_test.cpp match.cc sortnodes.cc vf2_mono_state.cc
          vf2_mono_state.cc
+         sortnodes.cc
+         match.cc
+         Mapping_test.cpp
+     1>e:\git\cgra_mapping\cgra_mapping\mapping_test.cpp(152): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+         c:\program files (x86)\windows kits\10\include\10.0.10150.0\ucrt\stdio.h(205): note: 参见“fopen”的声明
+         error.cc
          argraph.cc
          argedit.cc
-         正在生成代码...
-         正在编译...
-         Mapping_test.cpp
-     1>e:\git\cgra_mapping\cgra_mapping\mapping_test.cpp(113): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-         c:\program files (x86)\windows kits\10\include\10.0.10150.0\ucrt\stdio.h(205): note: 参见“fopen”的声明
          正在生成代码...
        Link:
          D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\git\CGRA_Mapping\Debug\CGRA_Mapping.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"E:\git\CGRA_Mapping\Debug\CGRA_Mapping.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\git\CGRA_Mapping\Debug\CGRA_Mapping.lib" /MACHINE:X86 Debug\argedit.obj
@@ -20,8 +21,8 @@
          Debug\sortnodes.obj
          Debug\vf2_mono_state.obj
          CGRA_Mapping.vcxproj -> E:\git\CGRA_Mapping\Debug\CGRA_Mapping.exe
-     1>已完成生成项目“E:\git\CGRA_Mapping\CGRA_Mapping\CGRA_Mapping.vcxproj”(Build 个目标)的操作。
+     1>已完成生成项目“E:\git\CGRA_Mapping\CGRA_Mapping\CGRA_Mapping.vcxproj”(Rebuild 个目标)的操作。
 
 已成功生成。
 
-已用时间 00:00:06.50
+已用时间 00:00:03.72

@@ -6,27 +6,64 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-
-//添加节点角色的属性
+#include <vector>
+//添加节点的属性
 #include "Pe.h"
 
 using namespace std;
 
 #define MAXNODES 60000
+#define AL_NUM 30
 
 int matchingCnt = 0;//记录发现的匹配数
 
-void getNodeEdge(ARGEdit &ed,string nodeName,string edgeName)
+void getNodeEdge_AL(ARGEdit &ed, string nodeName, string edgeName, vector<int>&row, vector<int>&col, string &name,int numN)
 {
 	/******************************获取节点************************************/
 	//从文件读取节点，节点文件一行是节点ID+" "+该节点的角色ID
 	ifstream nodeFile(nodeName);
-	int nodeID, pe;
-
+	int nodeID, r, c;
+	string pe;
+	nodeFile >> name;
+	nodeFile >> numN;
 	while (!nodeFile.eof())
 	{
-		nodeFile >> nodeID >> pe;
+		nodeFile >> nodeID >> r >> c >> pe;
+		row.push_back(r);
+		col.push_back(c);
+		//cout << nodeID << " " << pe << endl;
+		ed.InsertNode(new Pe(pe));
+	}
 
+	nodeFile.close();
+
+	/******************************获取边************************************/
+	//从文件读取边，边文件一行是起始节点ID+" "+目标节点ID
+	ifstream edgeFile(edgeName);
+	int start, end;
+	//cout << edgeName << endl;
+
+	while (!edgeFile.eof())
+	{
+		edgeFile >> start >> end;
+		//cout << start << " " << startPe << " " << end << " " << endPe << endl;
+
+		//创建边
+		ed.InsertEdge(start, end, NULL);
+	}
+
+	edgeFile.close();
+}
+void getNodeEdge_AR(ARGEdit &ed,string nodeName,string edgeName)
+{
+	/******************************获取节点************************************/
+	//从文件读取节点，节点文件一行是节点ID+" "+该节点的角色ID
+	ifstream nodeFile(nodeName);
+	int nodeID, r, c;
+	string pe;
+	while (!nodeFile.eof())
+	{
+		nodeFile >> nodeID >> r >> c >> pe;
 		//cout << nodeID << " " << pe << endl;
 		ed.InsertNode(new Pe(pe));
 	}
@@ -71,16 +108,16 @@ bool graph_visitor(int n, node_id ni1[], node_id ni2[], void *usr_data)
 	/*************** 匹配对储存在ni1和ni2中 **************/
 	FILE *f = (FILE *)usr_data;
 	//将统计到的匹配节点输出到文件中
-	fprintf(f,"n:%d",n); 
-	fprintf(f, "\n");
+//	fprintf(f,"n:%d",n); 
+//	fprintf(f, "\n");
 	for (int i = 0; i < n; i++)
-		fprintf(f,"(%hd,%hd)",ni1[i],ni2[i]);
+		fprintf(f,"%hd %hd | ",ni1[i],ni2[i]);
 
 	fprintf(f,"\n");
 	/*************** ,匹配对储存在ni1和ni2中 **************/
 
 	matchingCnt++; //得到匹配的数量
-	cout << matchingCnt << endl;
+//	cout << matchingCnt << endl;
 	//返回false用于搜索下一个匹配
 	return false;
 }
@@ -89,9 +126,11 @@ int main()
 {
 	//创建模式图和数据图的ed
 	ARGEdit pattern_ed,data_ed;
-
-	getNodeEdge(pattern_ed,"patternNode.txt","patternEdge.txt");
-	getNodeEdge(data_ed,"dataNode.txt","dataEdge.txt");
+	vector<vector<int>> row(AL_NUM), col(AL_NUM);
+	vector<string> al(AL_NUM);
+	vector<int> Node_num(AL_NUM);
+	getNodeEdge_AR(data_ed,"ARN_G1.txt","ARE_G1.txt");
+	getNodeEdge_AL(pattern_ed,"ALN_AES.txt","ALE_AES.txt",row[0],col[0],al[0],Node_num[0]);
 
 	//getData(pattern_ed,4);
 	//getData(data_ed,5);
