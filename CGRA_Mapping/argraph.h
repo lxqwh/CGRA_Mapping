@@ -1,63 +1,9 @@
 /*------------------------------------------------------------------
  * argraph.h
- * Interface of argraph.cc
- * Definition of a class representing an Attributed Relational 
- * Graph (ARG).
- *
- * Author: P. Foggia
+ * argraph.cc的接口
+ * 属性图类的接口定义
  *-----------------------------------------------------------------*/
 
-
-
-/*-----------------------------------------------------------------
- *   IMPLEMENTATION NOTES
- *
- * There is an implementation class, ARGraph_impl, which does
- * the real work and represents the node and edge attributes
- * using void* pointers; 
- * A template-based interface class ARGraph<NodeType,EdgeType>
- * provides type checking. Attributes are always managed 
- * via pointers. 
- *
- * The user has two choices for the attribute allocation strategy:
- * either the attributes are not owned by the graph, and someone
- * else has to provide for their deallocation, or the attributes
- * are owned by the graph, and are deallocated by means of a
- * user provided object or function.
- *
- * The graphs, once created, are immutable, in the sense that
- * graph-editing operations are not provided.
- * This allows the use of an internal representation particularly
- * suited for efficient graph matching, which is the primary target
- * of this program.
- *
- * An abstract class, ARGLoader, is defined to allow the
- * use of different file formats for loading the graphs.
- * The loader is queried by the ARGraph to acquire the information
- * needed for building the graph.
- * A simple ARGLoader based on iostream.h is provided in
- * argloader.h; see also argedit.h/argedit.cc for a class which can
- * be used as a base for a new ARGLoader.
- --------------------------------------------------------------------*/
-
-/*--------------------------------------------------------------------
- *   MORE IMPLEMENTATION DETAILS
- * Edges and edge attributes (pointers) are stored into sorted 
- * vectors associated to each node, and are looked for
- * using binary search. 
- * 
- * Nodes are identified using the type node_id, which is currently
- * unsigned short; the special value NULL_NODE is used as null
- * value for this type.
- *
- * Bound checks are performed using the assert macro. They can be
- * disabled by ensuring the macro NDEBUG is defined during 
- * compilation.
- *
- * NOTE: Differently from the previous versions of this library 
- * (before version 2.0), there is no more an adjacency matrix to 
- * check for the existence of a node.
- --------------------------------------------------------------------*/
 
 #ifndef ARGRAPH_H
 #define ARGRAPH_H
@@ -65,9 +11,6 @@
 #include <assert.h>
 #include <stddef.h>
 
-/*--------------------------------------------------------
- * General definitions
- -------------------------------------------------------*/
 #ifdef NEED_BOOL
 #ifndef BOOL_DEFINED
 #define BOOL_DEFINED
@@ -84,10 +27,6 @@ typedef unsigned char byte;
 
 typedef unsigned short node_id;
 const node_id NULL_NODE=0xFFFF;
-
-/*----------------------------------------------------------------
- * Abstract class ARGLoader. Allows to construct an ARGraph
- ---------------------------------------------------------------*/
 class ARGLoader
   { public:
       virtual ~ARGLoader() {}
@@ -100,20 +39,11 @@ class ARGLoader
   };
 
 
-/*------------------------------------------------------------
- * Abstract class AttrDestroyer. Allows to destroy
- * a node or edge attribute.
- -----------------------------------------------------------*/
 class AttrDestroyer
   { public:
       virtual ~AttrDestroyer() {};
       virtual void destroy(void *attr)=0;
   };
-
-/*----------------------------------------------------------
- * Abstract class AttrComparator. Allows to check for
- * compatibility between two node or egde attributes.
- ---------------------------------------------------------*/
 class AttrComparator
   { public:
       virtual ~AttrComparator() {};
@@ -121,12 +51,6 @@ class AttrComparator
   };
 
 
-
-/*--------------------------------------------------------
- * Declaration of class ARGraph_impl
- * This is the real representation of an ARG, but it is
- * intended to be used thru the interface ARGraph
- -------------------------------------------------------*/
 class ARGraph_impl
   { public:
       typedef void *param_type;
@@ -144,33 +68,33 @@ class ARGraph_impl
     private:
       typedef short count_type;
 
-      int n;              /* number of nodes  */
-      void* *attr;        /* node attributes  */
-      count_type  *in_count;  /* number of 'in' edges for each node */
-      node_id **in;       /* nodes connected by 'in' edges to each node */
-      void* **in_attr;    /* Edge attributes for 'in' edges */
-      count_type  *out_count; /* number of 'out edges for each node */
-      node_id **out;      /* nodes connected by 'out' edges to each node */
-      void* **out_attr;   /* Edge attributes for 'out' edges */
+      int n;              /* nodes 个数 */
+      void* *attr;        /* node 属性  */
+      count_type  *in_count;  /*每个节点的入边*/
+      node_id **in;       /* 每个节点入边的起点 */
+      void* **in_attr;    /* 入边属性*/
+      count_type  *out_count; /* 每个节点的出边 */
+      node_id **out;      /* 出边的终点*/
+      void* **out_attr;   /* 出边的属性 */
 
-      AttrDestroyer *node_destroyer;  // Used to clean up node attrs
-      AttrDestroyer *edge_destroyer;  // Used to clean up edge attrs
-      AttrComparator *node_comparator; // Used to test node attr. compat.
-      AttrComparator *edge_comparator; // Used to test edge attr. compat.
-
-
+      AttrDestroyer *node_destroyer;  // 节点属性清除
+      AttrDestroyer *edge_destroyer;  // 边属性清除
+      AttrComparator *node_comparator; // 节点属性比较
+      AttrComparator *edge_comparator; // 边属性比较
 
 
-    public: // was protected:
+
+
+    public: 
       void SetNodeDestroyer(AttrDestroyer *);
       void SetEdgeDestroyer(AttrDestroyer *);
-      void SetNodeDestroy(node_destroy_fn fn); // For older versions
-      void SetEdgeDestroy(edge_destroy_fn fn); // For older versions
+      void SetNodeDestroy(node_destroy_fn fn); 
+      void SetEdgeDestroy(edge_destroy_fn fn); 
 
       void SetNodeComparator(AttrComparator *);
       void SetEdgeComparator(AttrComparator *);
-      void SetNodeCompat(node_compat_fn); // For older versions
-      void SetEdgeCompat(edge_compat_fn); // For older versions
+      void SetNodeCompat(node_compat_fn); 
+      void SetEdgeCompat(edge_compat_fn); 
 
     public:
       ARGraph_impl(ARGLoader *loader);
@@ -209,16 +133,11 @@ class ARGraph_impl
       virtual void DestroyEdge(void *attr);
   };
 
-/*
- * The following typedef is for compatibility
- */
+
 typedef ARGraph_impl Graph;
 
 
-/*--------------------------------------------------------
- * Declaration of class ARGraph
- * This is the interface to manage ARGs.
- -------------------------------------------------------*/
+
 template <class Node, class Edge>
 class ARGraph: public ARGraph_impl
   { public:
@@ -238,7 +157,6 @@ class ARGraph: public ARGraph_impl
       typedef ARGraph_impl impl;
 
 
-      /*-------- methods ----------*/
 
       ARGraph(ARGLoader *loader) : impl(loader) {}
 
@@ -286,11 +204,7 @@ class ARGraph: public ARGraph_impl
   };
 
 
-/*---------------------------------------------------------------------
- * Declaration of classes FunctionAttrDestroyer and
- * FunctionAttrComparator, used to create an AttrDestroyer or
- * an AttrComparator from a C function.
- --------------------------------------------------------------------*/
+
 class FunctionAttrDestroyer: public AttrDestroyer
   { private:
       void (*func)(void *);
@@ -308,39 +222,21 @@ class FunctionAttrComparator: public AttrComparator
   };
 
 
-/*---------------------------------------------------------------------
- * INLINE METHODS
- ---------------------------------------------------------------------*/
-
-/*-----------------------------------------------
- * Class ARGraph_impl
- ----------------------------------------------*/
-
-/*-----------------------------------------------
- * Number of nodes in the graph
- ----------------------------------------------*/
 inline int ARGraph_impl::NodeCount() 
   { return n;
   } 
 
-/*----------------------------------------------
- * Attribute of a node
- ---------------------------------------------*/
+
 inline void * ARGraph_impl::GetNodeAttr(node_id i) 
   { assert(i<n);
     return attr[i];
   }
 
-/*----------------------------------------------
- * Check the presence of an edge
- ---------------------------------------------*/
 inline bool ARGraph_impl::HasEdge(node_id n1, node_id n2)
     { return HasEdge(n1, n2, NULL);
     }
 
-/*----------------------------------------------
- * Gets the attribute of an edge
- ---------------------------------------------*/
+
 inline void* ARGraph_impl::GetEdgeAttr(node_id n1, node_id n2)
     { void *attr;
       if (HasEdge(n1, n2, &attr))
@@ -350,45 +246,33 @@ inline void* ARGraph_impl::GetEdgeAttr(node_id n1, node_id n2)
     }
 
 
-/*------------------------------------------------
- * Number of edges going into a node
- ------------------------------------------------*/
+
 inline int ARGraph_impl::InEdgeCount(node_id node) 
   { assert(node<n); 
     return in_count[node]; 
   }
 
 
-/*------------------------------------------------
- * Number of edges departing from a node
- ------------------------------------------------*/
+
 inline int ARGraph_impl::OutEdgeCount(node_id node) 
   { assert(node<n); 
     return out_count[node]; 
   }
 
 
-/*-------------------------------------------------
- * Number of edges touching a node
- ------------------------------------------------*/
 inline int ARGraph_impl::EdgeCount(node_id node) 
   { assert(node<n); 
     return in_count[node]+out_count[node]; 
   }
 
-/*------------------------------------------------
- * Gets the other end of an edge entering a node
- -----------------------------------------------*/
+
 inline node_id ARGraph_impl::GetInEdge(node_id node, int i)
   { assert(node<n);
     assert(i<in_count[node]);
     return in[node][i];
   }
 
-/*------------------------------------------------
- * Gets the other end of an edge entering a node
- * Also gets the attribute of the edge
- -----------------------------------------------*/
+
 inline node_id ARGraph_impl::GetInEdge(node_id node, int i, 
                                        void **pattr)
   { assert(node<n);
@@ -398,19 +282,14 @@ inline node_id ARGraph_impl::GetInEdge(node_id node, int i,
   }
 
 
-/*------------------------------------------------
- * Gets the other end of an edge leaving a node
- -----------------------------------------------*/
+
 inline node_id ARGraph_impl::GetOutEdge(node_id node, int i)
   { assert(node<n);
     assert(i<out_count[node]);
     return out[node][i];
   }
 
-/*------------------------------------------------
- * Gets the other end of an edge leaving a node
- * Also gets the attribute of the edge
- -----------------------------------------------*/
+
 inline node_id ARGraph_impl::GetOutEdge(node_id node, int i, 
                                         void **pattr)
   { assert(node<n);
@@ -419,9 +298,7 @@ inline node_id ARGraph_impl::GetOutEdge(node_id node, int i,
     return out[node][i];
   }
 
-/*-----------------------------------------------------------
- * Checks if two node attributes are compatible
- ----------------------------------------------------------*/
+
 inline bool ARGraph_impl::CompatibleNode(void *attr1, void *attr2)
   { if (node_comparator==NULL)
       return true;
@@ -430,9 +307,7 @@ inline bool ARGraph_impl::CompatibleNode(void *attr1, void *attr2)
   }
 
 
-/*-----------------------------------------------------------
- * Checks if two edge attributes are compatible
- ----------------------------------------------------------*/
+
 inline bool ARGraph_impl::CompatibleEdge(void *attr1, void *attr2)
   { if (edge_comparator==NULL)
       return true;
@@ -442,6 +317,5 @@ inline bool ARGraph_impl::CompatibleEdge(void *attr1, void *attr2)
 
 
 #endif
-/* defined ARGRAPH_H */
 
 

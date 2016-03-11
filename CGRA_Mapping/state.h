@@ -1,48 +1,13 @@
 /*------------------------------------------------------------
  * state.h
- * Definition of an abstract class representing a state of the 
- * matching process between two ARGs.
- * See: argraph.h 
- *
- * Author: P. Foggia
- * $Id: state.h,v 1.3 1998/09/29 09:50:16 foggia Exp $
+ * 定义匹配过程中间状态的抽象类
  *-----------------------------------------------------------------*/
-
-
-/*-----------------------------------------------------------------
- * REVISION HISTORY
- *   $Log: state.h,v $
- *   Revision 1.3  1998/09/29 09:50:16  foggia
- *   Ora definisce una classe astratta State, da cui discendono
- *   VFState e UllState
- *
- *   Revision 1.2  1998/09/26 09:02:32  foggia
- *   minor changes
- *
- *   Revision 1.1  1998/09/19 14:40:35  foggia
- *   Initial revision
- *
- *----------------------------------------------------------------*/
-
-
 #ifndef STATE_H
 #define STATE_H
 
 #include "argraph.h"
 
 
-/*----------------------------------------------------------
- * class State
- * An abstract representation of the SSR current state.
- * NOTE: Respect to pre-2.0 version of the library, class
- *   State assumes explicitly a depth-first search. The
- *   BackTrack method has been added to allow a state 
- *   to clean up things before reverting to its parent. This
- *   can be used, for instance, for sharing resources between
- *   the parent and the child. The BackTrack implementation
- *   can safely assume that at most one AddPair has been
- *   performed on the state.
- ---------------------------------------------------------*/
 class State
   { 
 
@@ -58,7 +23,7 @@ class State
       virtual bool IsDead() =0;
       virtual int CoreLen() =0;
       virtual void GetCoreSet(node_id c1[], node_id c2[]) =0;
-      virtual State *Clone() =0;  // Changed clone to Clone for uniformity
+      virtual State *Clone() =0;  // 将clone改成Clone，保持一致性
      
       virtual void BackTrack() { };
   };

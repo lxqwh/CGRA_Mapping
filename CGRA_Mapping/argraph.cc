@@ -1,8 +1,6 @@
 /*-------------------------------------------------------------------
  * argraph.cc
- * Implementation of the ARGraph_impl class and of related classes 
- *
- * Author: P. Foggia
+ * ARGraph_impl相关类的实现
  ------------------------------------------------------------------*/
 
 
@@ -39,12 +37,12 @@ inline void clear(byte *ptr, int n)
 
 
 /*---------------------------------------------------------------
- * Static prototypes
+ * Static 模型
  --------------------------------------------------------------*/
 static void ptrcheck(void *);
 
 /*----------------------------------------------------------------
- * methods of the class ARGraph_impl
+ * ARGraph_impl类接口
  ---------------------------------------------------------------*/
 
 /*---------------------------------------------------------------
@@ -112,7 +110,7 @@ ARGraph_impl::ARGraph_impl(ARGLoader *loader)
 /*-------------------------------------------------
  * ARGraph_impl::~ARGraph_impl()
  * 析构函数.
- * Frees the memory allocated for the graph
+ * 释放内存
  ------------------------------------------------*/
 ARGraph_impl::~ARGraph_impl()
   { int i,j;
@@ -143,97 +141,48 @@ ARGraph_impl::~ARGraph_impl()
     delete edge_comparator;
   }
 
-/*-------------------------------------------------------------------
- * Set the object to invoke to destroy node attributes
- * Note:
- *   The object is owned by the graph; i.e. it is 
- *   deleted when the graph is deallocated.
- ------------------------------------------------------------------*/
 void ARGraph_impl::SetNodeDestroyer(AttrDestroyer *dest)
   { delete node_destroyer;
     node_destroyer=dest;
   }
 
-/*-------------------------------------------------------------------
- * Set the function to invoke to destroy node attributes.
- * Note:
- *   This function is provided for compatibility with older
- *   versions of the library. It creates an object of the class 
- *   FunctionAttrDestroyer.
- ------------------------------------------------------------------*/
 void ARGraph_impl::SetNodeDestroy(node_destroy_fn fn)
   { SetNodeDestroyer(new FunctionAttrDestroyer(fn));
   }
 
-/*-------------------------------------------------------------------
- * Set the object to invoke to destroy edge attributes
- * Note:
- *   The object is owned by the graph; i.e. it is 
- *   deleted when the graph is deallocated.
- ------------------------------------------------------------------*/
 void ARGraph_impl::SetEdgeDestroyer(AttrDestroyer *dest)
   { delete edge_destroyer;
     edge_destroyer=dest;
   }
 
-/*-------------------------------------------------------------------
- * Set the function to invoke to destroy edge attributes
- * Note:
- *   This function is provided for compatibility with older
- *   versions of the library. It creates an object of the class 
- *   FunctionAttrDestroyer.
- ------------------------------------------------------------------*/
+
 void ARGraph_impl::SetEdgeDestroy(edge_destroy_fn fn)
   { SetNodeDestroyer(new FunctionAttrDestroyer(fn));
   }
 
-/*-------------------------------------------------------------------
- * Set the object to invoke to compare node attributes
- * Note:
- *   The object is owned by the graph; i.e. it is 
- *   deleted when the graph is deallocated.
- ------------------------------------------------------------------*/
+
 void ARGraph_impl::SetNodeComparator(AttrComparator *comp)
   { delete node_comparator;
     node_comparator=comp;
   }
 
-/*-------------------------------------------------------------------
- * Set the function to invoke to test for node compatibility
- * Note:
- *   This function is provided for compatibility with older
- *   versions of the library. It creates an object of the class 
- *   FunctionAttrComparator.
- ------------------------------------------------------------------*/
+
 void ARGraph_impl::SetNodeCompat(node_compat_fn fn)
   { SetNodeComparator(new FunctionAttrComparator(fn));
   }
 
-/*-------------------------------------------------------------------
- * Set the object to invoke to compare edge attributes
- * Note:
- *   The object is owned by the graph; i.e. it is 
- *   deleted when the graph is deallocated.
- ------------------------------------------------------------------*/
+
 void ARGraph_impl::SetEdgeComparator(AttrComparator *comp)
   { delete edge_comparator;
     edge_comparator=comp;
   }
 
-/*-------------------------------------------------------------------
- * Set the function to invoke to test for edge compatibility
- * Note:
- *   This function is provided for compatibility with older
- *   versions of the library. It creates an object of the class 
- *   FunctionAttrComparator.
- ------------------------------------------------------------------*/
+
 void ARGraph_impl::SetEdgeCompat(edge_compat_fn fn)
   { SetEdgeComparator(new FunctionAttrComparator(fn));
   }
 
-/*-------------------------------------------------------------------
- * Change the attribute of a node
- -------------------------------------------------------------------*/
+
 void ARGraph_impl::SetNodeAttr(node_id i, void *new_attr, bool destroyOld)
   { assert(i<n);
     if (destroyOld)
@@ -241,14 +190,7 @@ void ARGraph_impl::SetNodeAttr(node_id i, void *new_attr, bool destroyOld)
     attr[i]=new_attr;
   }
 
-/*-------------------------------------------------------------------
- * Checks the existence of an edge, and returns its attribute
- * using the parameter pattr.
- * Note: uses binary search.
- * Implem. note: Uses the out/out_attr vectors; this fact is 
- *               exploited in the 构造函数 to generate the 
- *               in_attr vector
- ------------------------------------------------------------------*/
+
 bool ARGraph_impl::HasEdge(node_id n1, node_id n2, void **pattr)
   { register int a, b, c;
     node_id *id=out[n1];
@@ -273,11 +215,7 @@ bool ARGraph_impl::HasEdge(node_id n1, node_id n2, void **pattr)
     return false;
   }
 
-/*-------------------------------------------------------------------
- * Change the attribute of an edge. It is an error if the edge
- * does not exist.
- * Note: uses binary search.
- ------------------------------------------------------------------*/
+
 void  ARGraph_impl::SetEdgeAttr(node_id n1, node_id n2, void *new_attr,
                                 bool destroyOld)
   { register int a, b, c;
@@ -286,9 +224,7 @@ void  ARGraph_impl::SetEdgeAttr(node_id n1, node_id n2, void *new_attr,
     assert(n1<n);
     assert(n2<n);
 
-    //
-    // Replace the attribute in the out_attr array
-    //
+
     id=out[n1];
     a=0;
     b=out_count[n1];
@@ -308,9 +244,7 @@ void  ARGraph_impl::SetEdgeAttr(node_id n1, node_id n2, void *new_attr,
     if (a>=b)
       error("ARGraph_impl::SetEdgeAttr: non existent edge");
    
-    //
-    // Replace the attribute in the in_attr array
-    //
+
     id = in[n2];
     a=0;
     b=in_count[n2];
@@ -321,9 +255,7 @@ void  ARGraph_impl::SetEdgeAttr(node_id n1, node_id n2, void *new_attr,
         else if (id[c]>n1)
           b=c;
         else
-          { // The old attr here is intentionally
-	    // not destroyed with DestroyEdge, since destruction
-	    // has been performed previously through out_attr
+          { 
             in_attr[n2][c]=new_attr;
 	    break;
           }
@@ -333,10 +265,6 @@ void  ARGraph_impl::SetEdgeAttr(node_id n1, node_id n2, void *new_attr,
   }
 
 
-/*-------------------------------------------------------------------
- * void ARGraph_impl::VisitInEdges(node, vis, param)
- * Applies the visitor to all the 'in' edges of 'node'
- ------------------------------------------------------------------*/
 void ARGraph_impl::VisitInEdges(node_id node, edge_visitor vis, 
                                 param_type param)
   { 
@@ -346,10 +274,7 @@ void ARGraph_impl::VisitInEdges(node_id node, edge_visitor vis,
       vis(this, in[node][i], node, in_attr[node][i], param);
   }
 
-/*-------------------------------------------------------------------
- * void ARGraph_impl::VisitOutEdges(node, vis, param)
- * Applies the visitor to all the 'out' edges of 'node'
- ------------------------------------------------------------------*/
+
 void ARGraph_impl::VisitOutEdges(node_id node, edge_visitor vis, 
                                  param_type param)
   {
@@ -358,29 +283,16 @@ void ARGraph_impl::VisitOutEdges(node_id node, edge_visitor vis,
     for(i=0; i<out_count[node]; i++)
       vis(this, node, out[node][i], out_attr[node][i], param);
   }
-
-/*-------------------------------------------------------------------
- * void ARGraph_impl::VisitEdges(node, vis, param)
- * Applies the visitor to all the edges of 'node'
- ------------------------------------------------------------------*/
 void ARGraph_impl::VisitEdges(node_id node, edge_visitor vis, param_type param)
   { VisitInEdges(node, vis, param);
     VisitOutEdges(node, vis, param);
   }
 
 
-/*----------------------------------------------------------------------
- * Destroy the attribute of a node
- ---------------------------------------------------------------------*/
 void ARGraph_impl::DestroyNode(void *attr)
   { if (node_destroyer!=NULL)
       node_destroyer->destroy(attr);
   }
-
-
-/*----------------------------------------------------------------------
- * Destroy the attribute of an edge
- ---------------------------------------------------------------------*/
 void ARGraph_impl::DestroyEdge(void *attr)
   { if (edge_destroyer!=NULL)
       edge_destroyer->destroy(attr);
@@ -388,7 +300,7 @@ void ARGraph_impl::DestroyEdge(void *attr)
 
 
 /***********************************************************
- * Utility classes
+ * 实用类
  **********************************************************/
 FunctionAttrDestroyer::FunctionAttrDestroyer(void (*fn)(void *))
   { func = fn;
@@ -413,7 +325,7 @@ bool FunctionAttrComparator::compatible(void *attr1, void *attr2)
 
 
 /*-------------------------------------------------------------
- * Static functions
+ * 静态函数
  ------------------------------------------------------------*/
 static void ptrcheck(void *p)
   { if (p==NULL)

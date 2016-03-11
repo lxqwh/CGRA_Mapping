@@ -1,39 +1,7 @@
 /*------------------------------------------------------------------
  * vf2_mono_state.cc
  * VF2MonoState类实现
- *
- * Author: Li Xiaoquan
- * 2016/3/9
  *-----------------------------------------------------------------*/
-
-
-
-/*-----------------------------------------------------------------
- * NOTE: 
- *   The attribute compatibility check (methods CompatibleNode
- *   and CompatibleEdge of ARGraph) is always performed
- *   applying the method to g1, and passing the attribute of
- *   g1 as first argument, and the attribute of g2 as second
- *   argument. This may be important if the compatibility
- *   criterion is not symmetric.
- -----------------------------------------------------------------*/
-
-
-/*---------------------------------------------------------
- *   IMPLEMENTATION NOTES:
- * The six vectors core_1, core_2, in_1, in_2, out_1, out_2, 
- * are shared among the instances of this class; they are
- * owned by the instance with core_len==0 (the root of the
- * SSR).
- * In the vectors in_* and out_* there is a value indicating 
- * the level at which the corresponding node became a member
- * of the core or of Tin (for in_*) or Tout (for out_*),
- * or 0 if the node does not belong to the set.
- * This information is used for backtracking.
- * The fields t1out_len etc. also count the nodes in core.
- * The true t1out_len is t1out_len-core_len!
- ---------------------------------------------------------*/
-
 
 #include <stddef.h>
 
@@ -43,16 +11,6 @@
 #include "error.h"
 
 
-/*----------------------------------------------------------
- * Methods of the class VF2MonoState
- ---------------------------------------------------------*/
-
-/*----------------------------------------------------------
- * VF2MonoState::VF2MonoState(g1, g2, sortNodes)
- * 构造函数. Makes an empty state.
- * If sortNodes is true, computes an initial ordering
- * for the nodes based on the frequency of their valence.
- ---------------------------------------------------------*/
 VF2MonoState::VF2MonoState(Graph *ag1, Graph *ag2, bool sortNodes)
   { g1=ag1;
     g2=ag2;
@@ -152,13 +110,6 @@ VF2MonoState::~VF2MonoState()
   }
 
 
-/*--------------------------------------------------------------------------
- * bool VF2MonoState::NextPair(pn1, pn2, prev_n1, prev_n2)
- * Puts in *pn1, *pn2 the next pair of nodes to be tried.
- * prev_n1 and prev_n2 must be the last nodes, or NULL_NODE (default)
- * to start from the first pair.
- * Returns false if no more pairs are available.
- -------------------------------------------------------------------------*/
 bool VF2MonoState::NextPair(node_id *pn1, node_id *pn2,
               node_id prev_n1, node_id prev_n2)
   { 
@@ -244,17 +195,7 @@ bool VF2MonoState::NextPair(node_id *pn1, node_id *pn2,
 
 
 
-/*---------------------------------------------------------------
- * bool VF2MonoState::IsFeasiblePair(node1, node2)
- * Returns true if (node1, node2) can be added to the state
- * NOTE: 
- *   The attribute compatibility check (methods CompatibleNode
- *   and CompatibleEdge of ARGraph) is always performed
- *   applying the method to g1, and passing the attribute of
- *   g1 as first argument, and the attribute of g2 as second
- *   argument. This may be important if the compatibility
- *   criterion is not symmetric.
- --------------------------------------------------------------*/
+
 bool VF2MonoState::IsFeasiblePair(node_id node1, node_id node2)
   { assert(node1<n1);
     assert(node2<n2);
@@ -268,7 +209,7 @@ bool VF2MonoState::IsFeasiblePair(node_id node1, node_id node2)
     void *attr1;
     int termout1=0, termout2=0, termin1=0, termin2=0, new1=0, new2=0;
 
-    // Check the 'out' edges of node1
+    // 检查结node1的出边
     for(i=0; i<g1->OutEdgeCount(node1); i++)
       { other1=g1->GetOutEdge(node1, i, &attr1);
         if (core_1[other1] != NULL_NODE)
@@ -287,7 +228,7 @@ bool VF2MonoState::IsFeasiblePair(node_id node1, node_id node2)
           }
       }
 
-    // Check the 'in' edges of node1
+    // 检查node1的入边
     for(i=0; i<g1->InEdgeCount(node1); i++)
       { other1=g1->GetInEdge(node1, i, &attr1);
         if (core_1[other1]!=NULL_NODE)
@@ -307,7 +248,7 @@ bool VF2MonoState::IsFeasiblePair(node_id node1, node_id node2)
       }
 
 
-    // Check the 'out' edges of node2
+    // 检查node2的出边
     for(i=0; i<g2->OutEdgeCount(node2); i++)
       { other2=g2->GetOutEdge(node2, i);
         if (core_2[other2]!=NULL_NODE)
@@ -323,11 +264,11 @@ bool VF2MonoState::IsFeasiblePair(node_id node1, node_id node2)
           }
       }
 
-    // Check the 'in' edges of node2
+    // 检查node2的入边
     for(i=0; i<g2->InEdgeCount(node2); i++)
       { other2=g2->GetInEdge(node2, i);
         if (core_2[other2] != NULL_NODE)
-          { /* Do nothing */
+          { /* 直接略过 */
           }
         else 
           { if (in_2[other2])
@@ -345,11 +286,6 @@ bool VF2MonoState::IsFeasiblePair(node_id node1, node_id node2)
 
 
 
-/*--------------------------------------------------------------
- * void VF2MonoState::AddPair(node1, node2)
- * Adds a pair to the Core set of the state.
- * Precondition: the pair must be feasible
- -------------------------------------------------------------*/
 void VF2MonoState::AddPair(node_id node1, node_id node2)
   { assert(node1<n1);
     assert(node2<n2);
@@ -434,11 +370,6 @@ void VF2MonoState::AddPair(node_id node1, node_id node2)
 
 
 
-/*--------------------------------------------------------------
- * void VF2MonoState::GetCoreSet(c1, c2)
- * Reads the core set of the state into the arrays c1 and c2.
- * The i-th pair of the mapping is (c1[i], c2[i])
- --------------------------------------------------------------*/
 void VF2MonoState::GetCoreSet(node_id c1[], node_id c2[])
   { int i,j;
     for (i=0,j=0; i<n1; i++)
@@ -450,18 +381,11 @@ void VF2MonoState::GetCoreSet(node_id c1[], node_id c2[])
   }
 
 
-/*----------------------------------------------------------------
- * Clones a VF2MonoState, allocating with new the clone.
- --------------------------------------------------------------*/
 State* VF2MonoState::Clone()
   { return new VF2MonoState(*this);
   }
 
-/*----------------------------------------------------------------
- * Undoes the changes to the shared vectors made by the 
- * current state. Assumes that at most one AddPair has been
- * performed.
- ----------------------------------------------------------------*/
+
 void VF2MonoState::BackTrack()
   { assert(core_len - orig_core_len <= 1);
     assert(added_node1 != NULL_NODE);

@@ -1,7 +1,3 @@
-/*-------------------------------------------------------
- * match.cc
- * Definition of the match function
- ------------------------------------------------------*/
 
 #include "argraph.h"
 #include "match.h"
@@ -15,33 +11,17 @@ static bool match(node_id c1[], node_id c2[], match_visitor vis,
                  void *usr_data, State *s, int *pcount); 
 
 
-/*-------------------------------------------------------------
- * bool match(s0, pn, c1, c2)
- * Finds a matching between two graph, if it exists, given the 
- * initial state of the matching process. 
- * Returns true a match has been found.
- * *pn is assigned the number of matched nodes, and
- * c1 and c2 will contain the ids of the corresponding nodes 
- * in the two graphs
- ------------------------------------------------------------*/
+
 bool match(State *s0, int *pn, node_id c1[], node_id c2[])
   { 
     return match(pn,c1,c2,s0);
   }
 
-/*------------------------------------------------------------
- * int match(s0, vis, usr_data)
- * Visits all the matches between two graphs, given the
- * initial state of the match.
- * Returns the number of visited matches.
- * Stops when there are no more matches, or the visitor vis
- * returns true.
- ----------------------------------------------------------*/
+
 int match(State *s0, match_visitor vis, void *usr_data)
   { Graph *g1=s0->GetGraph1();
     Graph *g2=s0->GetGraph2();
-
-    /* Choose a conservative dimension for the arrays */
+	
     int n;
     if (g1->NodeCount()<g2->NodeCount())
       n=g2->NodeCount();
@@ -64,15 +44,7 @@ int match(State *s0, match_visitor vis, void *usr_data)
 
 
 
-/*-------------------------------------------------------------
- * static bool match(pn, c1, c2, s)
- * Finds a matching between two graphs, if it exists, starting
- * from state s.
- * Returns true a match has been found.
- * *pn is assigned the numbero of matched nodes, and
- * c1 and c2 will contain the ids of the corresponding nodes 
- * in the two graphs.
- ------------------------------------------------------------*/
+
 static bool match(int *pn, node_id c1[], node_id c2[], State *s)
   { if (s->IsGoal())
       { 
@@ -99,16 +71,6 @@ static bool match(int *pn, node_id c1[], node_id c2[], State *s)
   }
 
 
-
-
-/*-------------------------------------------------------------
- * static bool match(c1, c2, vis, usr_data, pcount)
- * Visits all the matchings between two graphs,  starting
- * from state s.
- * Returns true if the caller must stop the visit.
- * Stops when there are no more matches, or the visitor vis
- * returns true.
- ------------------------------------------------------------*/
 static bool match(node_id c1[], node_id c2[], 
                   match_visitor vis, void *usr_data, State *s, int *pcount)
   { if (s->IsGoal())
