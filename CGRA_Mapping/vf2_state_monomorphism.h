@@ -1,14 +1,14 @@
 /*------------------------------------------------------------
- * vf2_mono_state.h
- * vf2_mono_state.cc的接口定义
+ * vf2_state_monomorphism.h
+ * vf2_state_monomorphism.cc的接口定义
  * 图匹配的中间状态类定义 
  *-----------------------------------------------------------------*/
 
 
 
 
-#ifndef VF2_MONO_STATE_H
-#define VF2_MONO_STATE_H
+#ifndef VF2_STATE_MONOMORPHISM_H
+#define VF2_STATE_MONOMORPHISM_H
 
 #include "argraph.h"
 #include "state.h"

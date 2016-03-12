@@ -1,12 +1,12 @@
 /*------------------------------------------------------------------
- * vf2_mono_state.cc
+ * vf2_state_monomorphism.cc
  * VF2MonoState¿‡ µœ÷
  *-----------------------------------------------------------------*/
 
 #include <stddef.h>
 
-#include "vf2_mono_state.h"
-#include "sortnodes.h"
+#include "vf2_state_monomorphism.h"
+#include "sort_nodes.h"
 
 #include "error.h"
 

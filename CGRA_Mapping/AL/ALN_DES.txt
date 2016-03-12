@@ -1,6 +1,6 @@
-al
+DES
 4
-0  0 0 0_bnxor_
-1  1 0 0_lut_
-2  1 1 0_lut_
-3  2 0 0_bnxor_
+0 0 0_bnxor_
+1 0 0_lut_
+2 1 0_lut_
+3 0 0_bnxor_

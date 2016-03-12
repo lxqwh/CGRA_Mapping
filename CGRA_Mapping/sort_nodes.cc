@@ -1,10 +1,10 @@
 /*----------------------------------------------------
- * sortnodes.cc
+ * sort_nodes.cc
  * 根据前驱后继的频率对结点进行排序
  ---------------------------------------------------*/
 
 #include <stdlib.h>
-#include "sortnodes.h"
+#include "sort_nodes.h"
 
 #if 0
 // 测试main函数

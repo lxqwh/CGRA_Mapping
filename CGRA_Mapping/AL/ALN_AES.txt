@@ -1,10 +1,10 @@
-al
+AES
 8
-0  0 0 0_xorlut_
-1  0 1 0_xorlut_
-2  0 2 0_xorlut_
-3  0 3 0_xorlut_
-4  1 0 0_gfm_
-5  1 1 0_gfm_
-6  1 2 0_gfm_
-7  1 3 0_gfm_
+0  0 0_xorlut_
+1  1 0_xorlut_
+2  2 0_xorlut_
+3  3 0_xorlut_
+4  0 0_gfm_
+5  1 0_gfm_
+6  2 0_gfm_
+7  3 0_gfm_

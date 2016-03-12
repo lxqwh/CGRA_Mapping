@@ -1,10 +1,10 @@
 /*----------------------------------------------------
- * sortnodes.h
- * sortnodes.cc的头文件
+ * sort_nodes.h
+ * sort_nodes.cc的头文件
  *--------------------------------------------------*/
 
-#ifndef SORTNODES_H
-#define SORTNODES_H
+#ifndef SORT_NODES_H
+#define SORT_NODES_H
 
 #include "argraph.h"
 
