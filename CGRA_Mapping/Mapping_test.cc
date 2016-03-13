@@ -4,7 +4,6 @@
 #include "argedit.h"
 #include "match.h"
 #include "vf2_state_monomorphism.h"
-#include "pe_protocol.h"
 
 #include <iostream>
 #include <fstream>
@@ -22,6 +21,7 @@ using namespace std;
 
 
 #define AL_NUM_NOW 2 //当前算法个数
+#define MAX_G 4 //允许单轮映射的最大组数
 #define MAXNODES 60000
 
 int matchingCnt = 0;//记录发现的匹配数
@@ -252,43 +252,47 @@ int main()
 	vector<vector<string>> al_pe_func(AL_NUM_NOW);//不同算法的节点功能保存
 	vector<int> m_row(AL_NUM_NOW), m_col(AL_NUM_NOW);//映射的行、列结果
 	vector<map<string, vector<string>>> pe_util(12);//pe的功能使用统计
+	vector<string> ARN(MAX_G), ARE(MAX_G);
+	
+	for (int i = 1; i <= MAX_G; i++){//架构输入文件
+		ARN[i - 1] = string("AR/ARN_G") + char(i + '0') + string(".txt");
+		ARE[i - 1] = string("AR/ARE_G") + char(i + '0') + string(".txt");
+	}
+
 
 
 	//映射每一个算法
 	for (int i = 0; i < AL_NUM_NOW; i++) {
 		//创建模式图和数据图的ed
-		ARGEdit pattern_ed, data_ed1, data_ed2, data_ed3, data_ed4;
-		getNodeEdge_AR(data_ed1, "AR/ARN_G1.txt", "AR/ARE_G1.txt");
-		getNodeEdge_AR(data_ed2, "AR/ARN_G2.txt", "AR/ARE_G2.txt");	
-		getNodeEdge_AR(data_ed3, "AR/ARN_G3.txt", "AR/ARE_G3.txt");
-		getNodeEdge_AR(data_ed4, "AR/ARN_G4.txt", "AR/ARE_G4.txt");		
-		getNodeEdge_AL(pattern_ed, al_n_file[i], al_e_file[i], al_pe_func[i],col[i], al[i], Node_num[i]);
-
-		//getData(pattern_ed,4);
-		//getData(data_ed,5);
-		ARGraph<Pe, void> data_g(&data_ed);
+		ARGEdit pattern_ed;
+		getNodeEdge_AL(pattern_ed, al_n_file[i], al_e_file[i], al_pe_func[i], col[i], al[i], Node_num[i]);
 		ARGraph<Pe, void> pattern_g(&pattern_ed);
-
-		//设置属性清除器
-		data_g.SetNodeDestroyer(new PeDestroyer());
 		pattern_g.SetNodeDestroyer(new PeDestroyer());
-
-		//设置属性比较器
-		data_g.SetNodeComparator(new PeComparator());
 		pattern_g.SetNodeComparator(new PeComparator());
 
-		//创建子图异构的初始状态
-		VF2MonoState s0(&pattern_g, &data_g);
+		for (int j = 0; j < MAX_G; j++){
+			ARGEdit data_ed;
+			getNodeEdge_AR(data_ed, ARN[j], ARE[j]);
+			//getData(pattern_ed,4);
+			//getData(data_ed,5);
+			ARGraph<Pe, void> data_g(&data_ed);
+			//设置属性清除器
+			data_g.SetNodeDestroyer(new PeDestroyer());
+			//设置属性比较器
+			data_g.SetNodeComparator(new PeComparator());
+			//创建子图异构的初始状态
+			VF2MonoState s0(&pattern_g, &data_g);
+			//创建输出文件
+			errno_t er;
+			FILE *f;
+			er = fopen_s(&f, "output/subIso.txt", "w");
 
-		//创建输出文件
-		errno_t er;
-		FILE *f;
-		er = fopen_s(&f, "output/subIso.txt", "w");
-
-		int a = match(&s0, graph_visitor, f);
-		//fprintf(f, "n: %d", matchingCnt);//将找到的匹配数输出至文本
-        //cout << "a: " << a << endl;
-		fclose(f);
+			int a = match(&s0, graph_visitor, f);
+			//fprintf(f, "n: %d", matchingCnt);//将找到的匹配数输出至文本
+			//cout << "a: " << a << endl;
+			fclose(f);
+			if (a >= 1) break;
+		}
 
 		select("output/subIso.txt", col[i], result[i], m_row[i], m_col[i],Node_num[i]);
 		cout << "******************" << al[i] << "*******************" << endl;
