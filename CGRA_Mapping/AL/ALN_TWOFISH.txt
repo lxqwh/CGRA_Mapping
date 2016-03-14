@@ -1,0 +1,15 @@
+//
+TWOFISH
+12
+0  0 0_xorlut_
+1  1 0_xorsh_
+2  0 0_gfm_
+3  1 0_lut_
+4  1 0_gfm_
+5  0 0_au_
+6  1 0_au_
+7  0 0_auxor_
+8  1 0_auxor_
+9  3 0_xor_
+10 4 0_xorsh_
+11 3 0_sh_
