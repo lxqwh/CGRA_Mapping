@@ -20,7 +20,7 @@ using namespace std;
 
 
 
-#define AL_NUM_NOW 4 //当前算法个数
+#define AL_NUM_NOW 6 //当前算法个数
 #define MAX_G 4 //允许单轮映射的最大组数
 #define MAXNODES 60000
 
@@ -124,9 +124,9 @@ void select(string fileName, vector<int>&col, vector<pair<int,int>>& best,int &b
 	int rn = 0;
 	int trm = 0;  //规则1：从候选集中找出所有满足R=max(x)=min(max(x))的映射，这是映射最优选择的第一个条件，它保证选出的候选集的映射占有最少的行数
 	int tcm = 0;  //规则2：从候选集中找出所有满足C=max(y)=min(max(y))的映射，它保证选出的候选集的映射占有最少的列数
-	int tsy = 0;  //规则3：在最少列数的基础上使映射尽可能靠右
-	int tsx = 0;  //规则4：尽量靠上
-	int tmix = 0; //规则5：最少交叉
+	int tsy = 0;  //规则3：在最少列数的基础上使映射尽可能靠左映射
+	int tsx = 0;  //规则4：尽量靠上映射
+	int tmix = 0; //规则5：互连尽量减少交叉
 	int bsy = 0, bsx = 0, bmix = 0;
 	brm = 0; bcm = 0;
 	int rx = 0, ry = 0;
@@ -262,8 +262,8 @@ int main() {
 int main()
 {
 	//基本数据存储
-	vector<string> al_n_file = { "AL/ALN_AES.txt","AL/ALN_DES.txt","AL/ALN_TWOFISH.txt","AL/ALN_SM4.txt"  };//算法图结点输入
-	vector<string> al_e_file = { "AL/ALE_AES.txt","AL/ALE_DES.txt","AL/ALE_TWOFISH.txt","AL/ALE_SM4.txt" };//架构图边输入
+	vector<string> al_n_file = { "AL/ALN_AES.txt","AL/ALN_DES.txt","AL/ALN_TWOFISH.txt","AL/ALN_SM4.txt","AL/ALN_RC5.txt","AL/ALN_CAST128.txt"  };//算法图结点输入
+	vector<string> al_e_file = { "AL/ALE_AES.txt","AL/ALE_DES.txt","AL/ALE_TWOFISH.txt","AL/ALE_SM4.txt","AL/ALE_RC5.txt","AL/ALE_CAST128.txt" };//架构图边输入
 	vector<vector<int>> /*row(AL_NUM),*/ col(AL_NUM_NOW);//节点列信息保存
 	vector<string> al(AL_NUM_NOW);//算法名称
 	vector<int> Node_num(AL_NUM_NOW);//算法节点数

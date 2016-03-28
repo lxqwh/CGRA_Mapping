@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Allocator&lt;T&gt;" Collapsed="true">
+    <Position X="3" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAACgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>allocpool.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewAllocator&lt;T&gt;" Collapsed="true">
+    <Position X="3" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>allocpool.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NullAllocator&lt;T&gt;" Collapsed="true">
+    <Position X="5.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>allocpool.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AllocationPool&lt;T, CHUNK_SIZE&gt;" Collapsed="true">
+    <Position X="0.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAACAAQIAAAAAAAAAAAAAAAAgAEAAA=</HashCode>
+      <FileName>allocpool.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ARGEdit" Collapsed="true">
+    <Position X="0.5" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAIAAQAAAAAAAAFAAAQAAEAAAEAIAAABAFABAAIAQ=</HashCode>
+      <FileName>argedit.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ARGLoader" Collapsed="true">
+    <Position X="0.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAEAAAQAAAAAAEAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>argraph.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AttrDestroyer" Collapsed="true">
+    <Position X="6.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>argraph.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AttrComparator" Collapsed="true">
+    <Position X="1.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>argraph.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ARGraph_impl" Collapsed="true">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <NestedTypes>
+      <Typedef Name="ARGraph_impl::param_type" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>argraph.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Typedef Name="ARGraph_impl::edge_visitor" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>argraph.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Typedef Name="ARGraph_impl::node_destroy_fn" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>argraph.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Typedef Name="ARGraph_impl::edge_destroy_fn" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>argraph.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Typedef Name="ARGraph_impl::node_compat_fn" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>argraph.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Typedef Name="ARGraph_impl::edge_compat_fn" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>argraph.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+      <Typedef Name="ARGraph_impl::count_type" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>argraph.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Typedef>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>KoYAKUCAIBAAKSAIUIEhQIAQAAAEAIBAUCADAwAAAAE=</HashCode>
+      <FileName>argraph.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ARGraph&lt;Node, Edge&gt;" Collapsed="true">
+    <Position X="11" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AoYAAAAAIBAAKAAAAAEQQAAAAAAAAIBAAAABAQAAAAA=</HashCode>
+      <FileName>argraph.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FunctionAttrDestroyer" Collapsed="true">
+    <Position X="7.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAAAAEAAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>argraph.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FunctionAttrComparator" Collapsed="true">
+    <Position X="0.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAgAAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>argraph.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pe" Collapsed="true">
+    <Position X="13.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAACIAAAAAAAAAg=</HashCode>
+      <FileName>pe.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PeDestroyer" Collapsed="true">
+    <Position X="5.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>pe.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PeComparator" Collapsed="true">
+    <Position X="2.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>pe.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="State" Collapsed="true">
+    <Position X="8.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAgAAAAAAAAABAEAIAAAABEAAEAAAAABAIABA=</HashCode>
+      <FileName>state.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VF2MonoState" Collapsed="true">
+    <Position X="8.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAABABggRAIQABAhhAkAIAEAAFGAAEAgAKBkAIABA=</HashCode>
+      <FileName>vf2_state_monomorphism.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="NodeInfo" Collapsed="true">
+    <Position X="13.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>sort_nodes.cc</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Typedef Name="compare_fn" Collapsed="true">
+    <Position X="13.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>sort_nodes.cc</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="node_id" Collapsed="true">
+    <Position X="13.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>argraph.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Graph" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>argraph.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="match_visitor" Collapsed="true">
+    <Position X="15.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>match.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>
