@@ -18,7 +18,7 @@
 
 using namespace std;
 
-
+std::ofstream out("output/output");
 
 #define AL_NUM_NOW 6 //当前算法个数
 #define MAX_G 4 //允许单轮映射的最大组数
@@ -319,45 +319,44 @@ int main()
 		}
 
 		select("output/subIso.txt", col[i], result[i], m_row[i], m_col[i],Node_num[i]);
-		cout << "******************" << al[i] << "*******************" << endl;
-		cout << al[i] << "的匹配数: " << matchingCnt << endl;
-		cout << "使用的行数：" <<m_row[i]<< "   列数：" <<m_col[i]<< endl;
-		cout << "开始位置：" << k << endl;
-		cout << "对应的映射匹配：" << endl;
+		out << "******************" << al[i] << "*******************" << endl;
+		out << al[i] << "的匹配数: " << matchingCnt << endl;
+		out << "使用的行数：" <<m_row[i]<< "   列数：" <<m_col[i]<< endl;
+		out << "开始位置：" << k << endl;
+		out << "对应的映射匹配：" << endl;
 		for (auto ai : result[i]) {
-			cout << ai.first << " " << ai.second << " | ";
+			out << ai.first << " " << ai.second << " | ";
 
 			//统计pe功能使用情况
 			//ai.second%12(定位pe*)   al_pe_func[i][ai.first]第i个算法的ai.first节点对应的功能
 			pe_util[(ai.second+(k-1)*4) % 12][al_pe_func[i][ai.first]].push_back(al[i]);
 		}
 		matchingCnt = 0;
-		cout << endl<<endl<<endl;
+		out << endl<<endl<<endl;
 	}
 
 
 
 	//打印pe使用情况
 	for (int i = 0; i < 12; i++) {
-		cout << "第" << setw(2)<<i << "个PE功能使用统计：";
+		out << "第" << setw(2)<<i << "个PE功能使用统计：";
 		map<string, vector<string>>::iterator im = pe_util[i].begin();
 		if (im != pe_util[i].end()) {//单独打印第一个功能，便于后面对齐
-			cout << "功能：" << setw(12) << (*im).first << "，使用次数：" << setw(2) << (*im).second.size();
-			cout << "，算法：";
-			for (auto si : (*im).second) cout << setw(15) << si << " ";
+			out << "功能：" << setw(12) << (*im).first << "，使用次数：" << setw(2) << (*im).second.size();
+			out << "，算法：";
+			for (auto si : (*im).second) out << setw(15) << si << " ";
 			im++;
-			cout << endl;
+			out << endl;
 		}
 		while (im != pe_util[i].end()) {
-			cout << setw(28)<<"功能：" <<setw(12)<< (*im).first << "，使用次数：" << setw(2)<<(*im).second.size();
-			cout << "，算法：";
-			for (auto si : (*im).second) cout <<setw(15)<< si << " ";
+			out << setw(28)<<"功能：" <<setw(12)<< (*im).first << "，使用次数：" << setw(2)<<(*im).second.size();
+			out << "，算法：";
+			for (auto si : (*im).second) out <<setw(15)<< si << " ";
 			im++;
-			cout << endl;
+			out << endl;
 		}
-		cout << endl;
+		out << endl;
 	}
-
 	return 0;
 }
 
