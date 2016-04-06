@@ -46,39 +46,104 @@ CAST128的匹配数: 3072
 0 0 | 1 4 | 2 12 | 3 16 | 4 20 | 
 
 
-第 0个PE功能使用统计：功能：          au，使用次数： 2，算法：        TWOFISH             RC5 
-                      功能：       auxor，使用次数： 1，算法：        CAST128 
+******************BLOWFISH*******************
+BLOWFISH的匹配数: 384
+使用的行数：3   列数：4
+开始位置：2
+对应的映射匹配：
+0 0 | 1 1 | 2 2 | 3 3 | 4 4 | 5 8 | 
+
+
+******************SERPENT*******************
+SERPENT的匹配数: 10000
+使用的行数：7   列数：4
+开始位置：2
+对应的映射匹配：
+0 0 | 1 1 | 2 3 | 3 2 | 4 4 | 5 8 | 6 5 | 7 9 | 8 12 | 9 13 | 10 16 | 11 20 | 12 17 | 13 21 | 14 24 | 15 25 | 
+
+
+******************CAMELLIA*******************
+CAMELLIA的匹配数: 10000
+使用的行数：6   列数：2
+开始位置：2
+对应的映射匹配：
+0 0 | 1 1 | 2 4 | 3 8 | 4 12 | 5 16 | 6 17 | 7 20 | 
+
+
+******************GOST*******************
+GOST的匹配数: 64
+使用的行数：3   列数：1
+开始位置：1
+对应的映射匹配：
+0 0 | 1 4 | 2 8 | 
+
+
+******************TEA*******************
+TEA的匹配数: 10000
+使用的行数：4   列数：3
+开始位置：1
+对应的映射匹配：
+0 0 | 1 1 | 2 2 | 3 4 | 4 5 | 5 8 | 6 12 | 
+
+
+******************XTEA*******************
+XTEA的匹配数: 960
+使用的行数：3   列数：2
+开始位置：1
+对应的映射匹配：
+0 0 | 1 1 | 2 5 | 3 4 | 4 8 | 
+
+
+第 0个PE功能使用统计：功能：          au，使用次数： 4，算法：        TWOFISH             RC5            GOST             TEA 
+                      功能：       auxor，使用次数： 2，算法：        CAST128        BLOWFISH 
                       功能：       bnxor，使用次数： 1，算法：            DES 
+                      功能：          sh，使用次数： 3，算法：        SERPENT             TEA            XTEA 
+                      功能：         xor，使用次数： 2，算法：       CAMELLIA        CAMELLIA 
                       功能：       xorsh，使用次数： 2，算法：        TWOFISH             RC5 
+                      功能：      xorxor，使用次数： 1，算法：        SERPENT 
                       功能：   xorxorxor，使用次数： 1，算法：            SM4 
 
-第 1个PE功能使用统计：功能：         xor，使用次数： 1，算法：        TWOFISH 
+第 1个PE功能使用统计：功能：          au，使用次数： 1，算法：            TEA 
+                      功能：          sh，使用次数： 1，算法：           XTEA 
+                      功能：         xor，使用次数： 1，算法：        TWOFISH 
                       功能：       xorsh，使用次数： 1，算法：        TWOFISH 
+                      功能：      xorxor，使用次数： 2，算法：        SERPENT         SERPENT 
 
-第 2个PE功能使用统计：
+第 2个PE功能使用统计：功能：          sh，使用次数： 1，算法：            TEA 
+
 第 3个PE功能使用统计：
-第 4个PE功能使用统计：功能：          au，使用次数： 2，算法：        TWOFISH             RC5 
-                      功能：         lut，使用次数： 2，算法：            DES         CAST128 
-                      功能：       xorau，使用次数： 1，算法：        CAST128 
-                      功能：      xorlut，使用次数： 3，算法：            AES         TWOFISH             SM4 
+第 4个PE功能使用统计：功能：          au，使用次数： 3，算法：        TWOFISH             RC5             TEA 
+                      功能：         lut，使用次数： 3，算法：            DES         CAST128            GOST 
+                      功能：          sh，使用次数： 1，算法：        SERPENT 
+                      功能：         xor，使用次数： 1，算法：       CAMELLIA 
+                      功能：       xorau，使用次数： 2，算法：        CAST128            XTEA 
+                      功能：      xorlut，使用次数： 6，算法：            AES         TWOFISH             SM4        BLOWFISH         SERPENT        CAMELLIA 
+                      功能：      xorxor，使用次数： 1，算法：        SERPENT 
 
-第 5个PE功能使用统计：功能：       auxor，使用次数： 1，算法：        TWOFISH 
+第 5个PE功能使用统计：功能：          au，使用次数： 2，算法：            TEA            XTEA 
+                      功能：       auxor，使用次数： 1，算法：        TWOFISH 
                       功能：         lut，使用次数： 2，算法：            DES         TWOFISH 
-                      功能：      xorlut，使用次数： 1，算法：            AES 
+                      功能：          sh，使用次数： 2，算法：        SERPENT         SERPENT 
+                      功能：      xorlut，使用次数： 4，算法：            AES        BLOWFISH         SERPENT        CAMELLIA 
                       功能：      xorxor，使用次数： 1，算法：            SM4 
 
-第 6个PE功能使用统计：功能：      xorlut，使用次数： 1，算法：            AES 
+第 6个PE功能使用统计：功能：      xorlut，使用次数： 3，算法：            AES        BLOWFISH         SERPENT 
 
-第 7个PE功能使用统计：功能：      xorlut，使用次数： 1，算法：            AES 
+第 7个PE功能使用统计：功能：      xorlut，使用次数： 3，算法：            AES        BLOWFISH         SERPENT 
 
-第 8个PE功能使用统计：功能：       auxor，使用次数： 2，算法：        TWOFISH         CAST128 
+第 8个PE功能使用统计：功能：       auxor，使用次数： 3，算法：        TWOFISH         CAST128        BLOWFISH 
                       功能：       bnxor，使用次数： 1，算法：            DES 
                       功能：         gfm，使用次数： 2，算法：            AES         TWOFISH 
-                      功能：          sh，使用次数： 1，算法：        CAST128 
+                      功能：          sh，使用次数： 3，算法：        CAST128         SERPENT         SERPENT 
+                      功能：       shxor，使用次数： 1，算法：           GOST 
+                      功能：         xor，使用次数： 2，算法：       CAMELLIA        CAMELLIA 
+                      功能：       xorau，使用次数： 1，算法：           XTEA 
                       功能：       xorsh，使用次数： 2，算法：            SM4             RC5 
+                      功能：      xorxor，使用次数： 1，算法：            TEA 
 
 第 9个PE功能使用统计：功能：         gfm，使用次数： 2，算法：            AES         TWOFISH 
-                      功能：          sh，使用次数： 1，算法：        TWOFISH 
+                      功能：          sh，使用次数： 3，算法：        TWOFISH         SERPENT         SERPENT 
+                      功能：         xor，使用次数： 1，算法：       CAMELLIA 
                       功能：       xorsh，使用次数： 1，算法：            SM4 
 
 第10个PE功能使用统计：功能：         gfm，使用次数： 1，算法：            AES 

@@ -20,13 +20,13 @@ using namespace std;
 
 std::ofstream out("output/output");
 
-#define AL_NUM_NOW 6 //当前算法个数
+#define AL_NUM_NOW 13 //当前算法个数
 #define MAX_G 4 //允许单轮映射的最大组数
 #define MAXNODES 60000
 
 int matchingCnt = 0;//记录发现的匹配数
 
-void getNodeEdge_AL(ARGEdit &ed, string nodeName, string edgeName, vector<string> &func, vector<int>&col, string &name,int &numN)
+void getNodeEdge_AL(ARGEdit &ed, string nodeName, string edgeName, vector<string> &func, vector<int>&col, string &name,int &numN, int &G, int &C)
 {
 	/******************************获取节点************************************/
 	//从文件读取节点，节点文件一行是节点ID+" "+列坐标+" "+属性
@@ -38,6 +38,8 @@ void getNodeEdge_AL(ARGEdit &ed, string nodeName, string edgeName, vector<string
 	nodeFile >> note;
 	nodeFile >> name; //算法名称
 	nodeFile >> numN; //结点个数
+	nodeFile >> G; //特殊初始组约定
+	nodeFile >> C; //特殊初始行约定
 	while (!nodeFile.eof())
 	{
 		nodeFile >> nodeID >> c >> pe;
@@ -262,8 +264,16 @@ int main() {
 int main()
 {
 	//基本数据存储
-	vector<string> al_n_file = { "AL/ALN_AES.txt","AL/ALN_DES.txt","AL/ALN_TWOFISH.txt","AL/ALN_SM4.txt","AL/ALN_RC5.txt","AL/ALN_CAST128.txt"  };//算法图结点输入
-	vector<string> al_e_file = { "AL/ALE_AES.txt","AL/ALE_DES.txt","AL/ALE_TWOFISH.txt","AL/ALE_SM4.txt","AL/ALE_RC5.txt","AL/ALE_CAST128.txt" };//架构图边输入
+	vector<string> al_n_file = { "AL/ALN_AES.txt","AL/ALN_DES.txt","AL/ALN_TWOFISH.txt","AL/ALN_SM4.txt",
+								 "AL/ALN_RC5.txt","AL/ALN_CAST128.txt","AL/ALN_BLOWFISH.txt","AL/ALN_SERPENT.txt",
+                                 "AL/ALN_SEED.txt","AL/ALN_CAMELLIA.txt","AL/ALN_GOST.txt","AL/ALN_TEA.txt",
+								 "AL/ALN_XTEA.txt"
+								 };//算法图结点输入
+	vector<string> al_e_file = { "AL/ALE_AES.txt","AL/ALE_DES.txt","AL/ALE_TWOFISH.txt","AL/ALE_SM4.txt",
+								 "AL/ALE_RC5.txt","AL/ALE_CAST128.txt","AL/ALE_BLOWFISH.txt","AL/ALE_SERPENT.txt",
+                                 "AL/ALE_SEED.txt","AL/ALE_CAMELLIA.txt","AL/ALE_GOST.txt","AL/ALE_TEA.txt",
+								 "AL/ALE_XTEA.txt"
+								 };//算法图边输入
 	vector<vector<int>> /*row(AL_NUM),*/ col(AL_NUM_NOW);//节点列信息保存
 	vector<string> al(AL_NUM_NOW);//算法名称
 	vector<int> Node_num(AL_NUM_NOW);//算法节点数
@@ -272,7 +282,7 @@ int main()
 	vector<int> m_row(AL_NUM_NOW), m_col(AL_NUM_NOW);//映射的行、列结果
 	vector<map<string, vector<string>>> pe_util(12);//pe的功能使用统计
 	vector<string> ARN(MAX_G), ARE(MAX_G);
-	
+	vector<int> G(AL_NUM_NOW, 0), C(AL_NUM_NOW, 1);
 	for (int i = 1; i <= MAX_G; i++){//架构输入文件
 		ARN[i - 1] = string("AR/ARN_G") + to_string(i);
 		ARE[i - 1] = string("AR/ARE_G") + to_string(i) + string(".txt");
@@ -282,17 +292,18 @@ int main()
 
 	//映射每一个算法
 	for (int i = 0; i < AL_NUM_NOW; i++) {
+		if (i == 8) continue;//跳过SEED算法
 		int k = 0; //第几顺位
 		//创建模式图和数据图的ed
 		ARGEdit pattern_ed;
-		getNodeEdge_AL(pattern_ed, al_n_file[i], al_e_file[i], al_pe_func[i], col[i], al[i], Node_num[i]);
+		getNodeEdge_AL(pattern_ed, al_n_file[i], al_e_file[i], al_pe_func[i], col[i], al[i], Node_num[i],G[i],C[i]);
 		ARGraph<Pe, void> pattern_g(&pattern_ed);
 		pattern_g.SetNodeDestroyer(new PeDestroyer());
 		pattern_g.SetNodeComparator(new PeComparator());
 
-		for (int j = 0; j < MAX_G; j++){
+		for (int j = G[i]-1; j < MAX_G; j++){
 			int a=0;
-			for (k = 1; k <=3; k++) {
+			for (k = C[i]; k <=3; k++) {
 				ARGEdit data_ed;
 				string arn=ARN[j] + string("/") + to_string(k) + string(".txt");
 				getNodeEdge_AR(data_ed, arn , ARE[j]);
@@ -324,15 +335,21 @@ int main()
 		out << "使用的行数：" <<m_row[i]<< "   列数：" <<m_col[i]<< endl;
 		out << "开始位置：" << k << endl;
 		out << "对应的映射匹配：" << endl;
+		cout << "******************" << al[i] << "*******************" << endl;
+		cout << al[i] << "的匹配数: " << matchingCnt << endl;
+		cout << "使用的行数：" <<m_row[i]<< "   列数：" <<m_col[i]<< endl;
+		cout << "开始位置：" << k << endl;
+		cout << "对应的映射匹配：" << endl;
 		for (auto ai : result[i]) {
 			out << ai.first << " " << ai.second << " | ";
-
+			cout << ai.first << " " << ai.second << " | ";
 			//统计pe功能使用情况
 			//ai.second%12(定位pe*)   al_pe_func[i][ai.first]第i个算法的ai.first节点对应的功能
 			pe_util[(ai.second+(k-1)*4) % 12][al_pe_func[i][ai.first]].push_back(al[i]);
 		}
 		matchingCnt = 0;
 		out << endl<<endl<<endl;
+		cout << endl<<endl<<endl;
 	}
 
 
@@ -340,22 +357,37 @@ int main()
 	//打印pe使用情况
 	for (int i = 0; i < 12; i++) {
 		out << "第" << setw(2)<<i << "个PE功能使用统计：";
+		cout << "第" << setw(2)<<i << "个PE功能使用统计：";
 		map<string, vector<string>>::iterator im = pe_util[i].begin();
 		if (im != pe_util[i].end()) {//单独打印第一个功能，便于后面对齐
 			out << "功能：" << setw(12) << (*im).first << "，使用次数：" << setw(2) << (*im).second.size();
 			out << "，算法：";
-			for (auto si : (*im).second) out << setw(15) << si << " ";
+			cout << "功能：" << setw(12) << (*im).first << "，使用次数：" << setw(2) << (*im).second.size();
+			cout << "，算法：";
+			for (auto si : (*im).second) 
+			{
+			out << setw(15) << si << " ";
+        	cout << setw(15) << si << " ";
+			}
 			im++;
 			out << endl;
+			cout << endl;			
 		}
 		while (im != pe_util[i].end()) {
 			out << setw(28)<<"功能：" <<setw(12)<< (*im).first << "，使用次数：" << setw(2)<<(*im).second.size();
 			out << "，算法：";
-			for (auto si : (*im).second) out <<setw(15)<< si << " ";
+			cout << setw(28)<<"功能：" <<setw(12)<< (*im).first << "，使用次数：" << setw(2)<<(*im).second.size();
+			cout << "，算法：";
+			for (auto si : (*im).second) {
+				out <<setw(15)<< si << " ";		
+				cout <<setw(15)<< si << " ";				
+			}
 			im++;
 			out << endl;
+			cout << endl;
 		}
 		out << endl;
+		cout << endl;
 	}
 	return 0;
 }
