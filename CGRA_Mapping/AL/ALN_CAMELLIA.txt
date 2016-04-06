@@ -1,0 +1,12 @@
+//
+CAMELLIA
+8
+1 1
+0  0 0_xorlut_
+1  1 0_xorlut_
+2  0 0_xor_
+3  0 0_xor_
+4  0 0_xor_
+5  0 0_xor_
+6  0 0_xor_
+7  1 0_xor_

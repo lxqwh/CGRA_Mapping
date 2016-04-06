@@ -1,0 +1,16 @@
+//
+SEED
+12
+4 1
+0   0 0_auxor_
+1   1 0_xor_
+2   0 0_xorlut_
+3   0 0_and_
+4   0 0_xorxorxor_
+5   0 0_au_
+6   0 0_lut_
+7   0 0_and_
+8   0 0_xorxorxor_
+9   0 0_au_
+10  0 0_lut_
+11  0 0_and_

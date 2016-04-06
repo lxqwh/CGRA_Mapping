@@ -1,0 +1,10 @@
+//
+BLOWFISH
+6
+1 1
+0  0 0_xorlut_
+1  1 0_xorlut_
+2  2 0_xorlut_
+3  3 0_xorlut_
+4  0 0_auxor_
+5  0 0_auxor_
