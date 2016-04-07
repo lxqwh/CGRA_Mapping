@@ -1,7 +1,7 @@
 //
 SEED
 12
-4 1
+5 1
 0   0 0_auxor_
 1   1 0_xor_
 2   0 0_xorlut_

@@ -1,0 +1,8 @@
+//进行了错位调整
+KHAZAD
+4
+1 1
+0  0 0_gfm_
+1  1 0_gfm_
+2  0 0_xorlut_
+3  1 0_xorlut_

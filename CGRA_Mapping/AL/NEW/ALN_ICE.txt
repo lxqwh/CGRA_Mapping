@@ -1,0 +1,20 @@
+//
+ICE
+16
+1 1
+0  0 0_xorlut_
+1  1 0_xorlut_
+2  2 0_xorlut_
+3  3 0_xorlut_
+4  0 0_sh_
+5  0 0_sh_
+6  2 0_sh_
+7  1 0_xorxor_
+8  3 0_xorxor_
+9  1 0_sh_
+10 3 0_sh_
+11 0 0_xorxor_
+12 1 0_sh_
+13 2 0_xorxor_
+14 0 0_sh_
+15 2 0_sh_

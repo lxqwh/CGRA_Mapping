@@ -20,8 +20,8 @@ using namespace std;
 
 std::ofstream out("output/output");
 
-#define AL_NUM_NOW 13 //当前算法个数
-#define MAX_G 4 //允许单轮映射的最大组数
+#define AL_NUM_NOW 30 //当前算法个数
+#define MAX_G 5 //允许单轮映射的最大组数
 #define MAXNODES 60000
 
 int matchingCnt = 0;//记录发现的匹配数
@@ -246,9 +246,9 @@ bool graph_visitor(int n, node_id ni1[], node_id ni2[], void *usr_data)
 	return false;
 }
 
-#if 0 
+#if 0
 int main() {
-	int group = 4;
+	int group = 5;
 	int node_num = 12 * group;
 	ofstream outFile("AR/output");
 	for (int i = 0; i < node_num - 4; i++) {
@@ -267,12 +267,24 @@ int main()
 	vector<string> al_n_file = { "AL/ALN_AES.txt","AL/ALN_DES.txt","AL/ALN_TWOFISH.txt","AL/ALN_SM4.txt",
 								 "AL/ALN_RC5.txt","AL/ALN_CAST128.txt","AL/ALN_BLOWFISH.txt","AL/ALN_SERPENT.txt",
                                  "AL/ALN_SEED.txt","AL/ALN_CAMELLIA.txt","AL/ALN_GOST.txt","AL/ALN_TEA.txt",
-								 "AL/ALN_XTEA.txt"
+								 "AL/ALN_XTEA.txt",
+								 "AL/NEW/ALN_SPECK.txt","AL/NEW/ALN_SIMON.txt","AL/NEW/ALN_LUCIFER.txt",
+								 "AL/NEW/ALN_CLEFIA.txt","AL/NEW/ALN_ARIA.txt","AL/NEW/ALN_C2.txt",
+								 "AL/NEW/ALN_PRESENT.txt","AL/NEW/ALN_MACGUFFIN.txt","AL/NEW/ALN_SQUARE.txt",
+								 "AL/NEW/ALN_M6.txt","AL/NEW/ALN_SHARK.txt","AL/NEW/ALN_NUSH.txt",
+								 "AL/NEW/ALN_GRAND_CRU.txt","AL/NEW/ALN_E2.txt","AL/NEW/ALN_KHAZAD.txt",
+								 "AL/NEW/ALN_Hierocrypt-L1.txt","AL/NEW/ALN_Hierocrypt-3.txt"
 								 };//算法图结点输入
 	vector<string> al_e_file = { "AL/ALE_AES.txt","AL/ALE_DES.txt","AL/ALE_TWOFISH.txt","AL/ALE_SM4.txt",
 								 "AL/ALE_RC5.txt","AL/ALE_CAST128.txt","AL/ALE_BLOWFISH.txt","AL/ALE_SERPENT.txt",
                                  "AL/ALE_SEED.txt","AL/ALE_CAMELLIA.txt","AL/ALE_GOST.txt","AL/ALE_TEA.txt",
-								 "AL/ALE_XTEA.txt"
+								 "AL/ALE_XTEA.txt",
+								 "AL/NEW/ALE_SPECK.txt","AL/NEW/ALE_SIMON.txt","AL/NEW/ALE_LUCIFER.txt",
+								 "AL/NEW/ALE_CLEFIA.txt","AL/NEW/ALE_ARIA.txt","AL/NEW/ALE_C2.txt",
+								 "AL/NEW/ALE_PRESENT.txt","AL/NEW/ALE_MACGUFFIN.txt","AL/NEW/ALE_SQUARE.txt",
+								 "AL/NEW/ALE_M6.txt","AL/NEW/ALE_SHARK.txt","AL/NEW/ALE_NUSH.txt",
+								 "AL/NEW/ALE_GRAND_CRU.txt","AL/NEW/ALE_E2.txt","AL/NEW/ALE_KHAZAD.txt",
+								 "AL/NEW/ALE_Hierocrypt-L1.txt","AL/NEW/ALE_Hierocrypt-3.txt"
 								 };//算法图边输入
 	vector<vector<int>> /*row(AL_NUM),*/ col(AL_NUM_NOW);//节点列信息保存
 	vector<string> al(AL_NUM_NOW);//算法名称
@@ -292,7 +304,7 @@ int main()
 
 	//映射每一个算法
 	for (int i = 0; i < AL_NUM_NOW; i++) {
-		if (i == 8) continue;//跳过SEED算法
+	//	if (i !=8) continue;//跳过SEED算法
 		int k = 0; //第几顺位
 		//创建模式图和数据图的ed
 		ARGEdit pattern_ed;

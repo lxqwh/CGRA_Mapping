@@ -1,0 +1,12 @@
+//
+Hierocrypt-L1
+8
+1 1
+0  0 0_xorlut_
+1  1 0_xorlut_
+2  0 0_gfm_
+3  1 0_gfm_
+4  0 0_xorlut_
+5  1 0_xorlut_
+6  0 0_gfm_
+7  1 0_gfm_

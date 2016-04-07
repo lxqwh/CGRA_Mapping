@@ -1,0 +1,20 @@
+//
+Hierocrypt-3
+16
+1 1
+0  0 0_xorlut_
+1  1 0_xorlut_
+2  2 0_xorlut_
+3  3 0_xorlut_
+4  0 0_gfm_
+5  1 0_gfm_
+6  2 0_gfm_
+7  3 0_gfm_
+8  0 0_xorlut_
+9  1 0_xorlut_
+10 2 0_xorlut_
+11 3 0_xorlut_
+12 0 0_gfm_
+13 1 0_gfm_
+14 2 0_gfm_
+15 3 0_gfm_

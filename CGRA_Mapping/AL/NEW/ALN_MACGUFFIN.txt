@@ -1,0 +1,7 @@
+//
+MACGUFFIN
+3
+1 1
+0  0 0_xorlut_
+1  1 0_xorlut_
+2  0 0_xor_
