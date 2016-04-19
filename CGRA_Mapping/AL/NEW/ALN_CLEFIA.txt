@@ -2,9 +2,9 @@
 CLEFIA
 6
 1 1
-0  0 0_xorlut_
-1  1 0_xorlut_
-2  0 0_gfm_
-3  1 0_gfm_
-4  0 0_xorxor_
-5  1 0_xorxor_
+0  0 00_xorlut_
+1  1 00_xorlut_
+2  0 00_gfm_
+3  1 00_gfm_
+4  0 00_xorxor_
+5  1 00_xorxor_

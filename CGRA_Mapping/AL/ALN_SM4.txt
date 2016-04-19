@@ -2,9 +2,9 @@
 SM4
 6
 1 1
-0  0 0_xorlut_
-1  0 0_xorsh_
-2  1 0_xorsh_
-3  2 0_sh_
-4  1 0_xorxorxor_
-5  1 0_xorxor_
+0  0 00_xorlut_
+1  0 00_xorsh_
+2  1 00_xorsh_
+3  2 00_sh_
+4  1 00_xorxorxor_
+5  1 00_xorxor_

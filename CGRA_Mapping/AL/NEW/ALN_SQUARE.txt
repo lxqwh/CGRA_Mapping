@@ -1,16 +1,12 @@
 //
 SQUARE
-12
+8
 1 1
-0  0 0_xor_
-1  1 0_xor_
-2  2 0_xor_
-3  3 0_xor_
-4  0 0_lut_
-5  1 0_lut_
-6  2 0_lut_
-7  3 0_lut_
-8  0 0_gfm_
-9  1 0_gfm_
-10 2 0_gfm_
-11 3 0_gfm_
+0  0 00_xorlut_
+1  1 00_xorlut_
+2  2 00_xorlut_
+3  3 00_xorlut_
+4  0 00_gfm_
+5  1 00_gfm_
+6  2 00_gfm_
+7  3 00_gfm_

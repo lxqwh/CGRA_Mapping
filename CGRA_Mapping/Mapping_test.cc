@@ -45,7 +45,7 @@ void getNodeEdge_AL(ARGEdit &ed, string nodeName, string edgeName, vector<string
 		nodeFile >> nodeID >> c >> pe;
 //		row.push_back(r);
 		col.push_back(c);
-		func.push_back(pe.substr(2, pe.size() - 3));
+		func.push_back(pe.substr(3, pe.size() - 4));
 		ed.InsertNode(new Pe(pe));
 	}
 

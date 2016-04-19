@@ -59,22 +59,26 @@ public:
 		//return a->getPeAttr() == b->getPeAttr();
 		string as = a->getPeAttr();
 		string bs = b->getPeAttr();
-		if(as[0]=='0' && bs[0]=='1'){
+		if (bs.find(as.substr(2, as.size() - 2)) != string::npos)
+			return true;
+		else
+			return false;
+		/*if(as[0]=='0' && bs[0]>='1'){
 			if (bs.find(as.substr(1, as.size() - 1)) != string::npos)
 				return true;
 			else
 				return false;
 		}
-		else if(as[0]=='1' && bs[0]=='0'){
+		else if(as[0]>='1' && bs[0]=='0'){
 			return compatible(nodeB, nodeA);
 		}
 		else if(as[0]=='0' && bs[0]=='0'){
 			return as == bs;
 		}
-		else if(as[0]=='1' && bs[0]=='1'){
-			return as == bs;
+		else if(as[0]>='1' && bs[0]>='1'){
+			return as.substr(2,as.size()-1) == bs.substr(2,bs.size()-1);
 		}
 		else 
-			return false;
+			return false;*/
 	}
 };

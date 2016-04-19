@@ -2,13 +2,13 @@
 GRAND_CRU
 10
 1 1
-0  0 0_xorlut_
-1  1 0_xorlut_
-2  2 0_xorlut_
-3  3 0_xorlut_
-4  0 0_gfm_
-5  1 0_gfm_
-6  2 0_gfm_
-7  3 0_gfm_
-8  0 0_bn_
-9  1 0_bn_
+0  0 00_xorlut_
+1  1 00_xorlut_
+2  2 00_xorlut_
+3  3 00_xorlut_
+4  0 00_gfm_
+5  1 00_gfm_
+6  2 00_gfm_
+7  3 00_gfm_
+8  0 00_bn_
+9  1 00_bn_

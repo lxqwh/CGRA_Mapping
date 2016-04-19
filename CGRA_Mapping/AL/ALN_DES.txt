@@ -2,7 +2,7 @@
 DES
 4
 1 1
-0 0 0_bnxor_
-1 0 0_lut_
-2 1 0_lut_
-3 0 0_bnxor_
+0 0 00_bnxor_
+1 0 00_lut_
+2 1 00_lut_
+3 0 00_bnxor_

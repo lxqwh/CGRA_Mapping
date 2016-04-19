@@ -2,8 +2,8 @@
 CAST128
 5
 1 1
-0  0 0_xorau_
-1  0 0_sh_
-2  0 0_lut_
-3  0 0_auxor_
-4  0 0_auxor_
+0  0 00_xorau_
+1  0 00_sh_
+2  0 00_lut_
+3  0 00_auxor_
+4  0 00_auxor_
