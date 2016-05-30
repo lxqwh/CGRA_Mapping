@@ -43,7 +43,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="AttrDestroyer" Collapsed="true">
-    <Position X="6.75" Y="6.75" Width="1.5" />
+    <Position X="17.25" Y="6.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAgAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>argraph.h</FileName>
@@ -56,8 +56,12 @@
       <FileName>argraph.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ARGraph_impl" Collapsed="true">
-    <Position X="4" Y="2.5" Width="1.5" />
+  <Class Name="ARGraph_impl">
+    <Position X="7.5" Y="3" Width="6.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
     <NestedTypes>
       <Typedef Name="ARGraph_impl::param_type" Collapsed="true">
         <TypeIdentifier>
@@ -100,15 +104,8 @@
       <FileName>argraph.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ARGraph&lt;Node, Edge&gt;" Collapsed="true">
-    <Position X="11" Y="3.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AoYAAAAAIBAAKAAAAAEQQAAAAAAAAIBAAAABAQAAAAA=</HashCode>
-      <FileName>argraph.h</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="FunctionAttrDestroyer" Collapsed="true">
-    <Position X="7.75" Y="8" Width="1.5" />
+    <Position X="18.25" Y="8" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAABAAAAAAAAAAAAAAEAAAAAAAAEAAAAAAAAAAAA=</HashCode>
       <FileName>argraph.h</FileName>
@@ -122,14 +119,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Pe" Collapsed="true">
-    <Position X="13.5" Y="0.5" Width="1.5" />
+    <Position X="17.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAACIAAAAAAAAAg=</HashCode>
       <FileName>pe.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PeDestroyer" Collapsed="true">
-    <Position X="5.5" Y="8" Width="1.5" />
+    <Position X="16" Y="8" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>pe.h</FileName>
@@ -143,49 +140,42 @@
     </TypeIdentifier>
   </Class>
   <Class Name="State" Collapsed="true">
-    <Position X="8.5" Y="1.75" Width="1.5" />
+    <Position X="14.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAABAAgAAAAAAAAABAEAIAAAABEAAEAAAAABAIABA=</HashCode>
       <FileName>state.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VF2MonoState" Collapsed="true">
-    <Position X="8.5" Y="3" Width="1.5" />
+    <Position X="14.75" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAgAABABggRAIQABAhhAkAIAEAAFGAAEAgAKBkAIABA=</HashCode>
       <FileName>vf2_state_monomorphism.h</FileName>
     </TypeIdentifier>
   </Class>
   <Struct Name="NodeInfo" Collapsed="true">
-    <Position X="13.5" Y="1.75" Width="1.5" />
+    <Position X="17.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAIEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
       <FileName>sort_nodes.cc</FileName>
     </TypeIdentifier>
   </Struct>
   <Typedef Name="compare_fn" Collapsed="true">
-    <Position X="13.5" Y="3" Width="1.5" />
+    <Position X="17.25" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>sort_nodes.cc</FileName>
     </TypeIdentifier>
   </Typedef>
   <Typedef Name="node_id" Collapsed="true">
-    <Position X="13.5" Y="3.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>argraph.h</FileName>
-    </TypeIdentifier>
-  </Typedef>
-  <Typedef Name="Graph" Collapsed="true">
-    <Position X="4" Y="0.5" Width="1.5" />
+    <Position X="17.25" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>argraph.h</FileName>
     </TypeIdentifier>
   </Typedef>
   <Typedef Name="match_visitor" Collapsed="true">
-    <Position X="15.25" Y="3" Width="1.5" />
+    <Position X="19" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>match.h</FileName>
